@@ -22,24 +22,13 @@ class fMRIDataset_2C(Dataset):
     def __getitem__(self, index):
         id = self.ID[index]
         filename = str(id)+'.h5'
-        # hf = h5py.File(os.path.join(self.datadir, filename),'r')
-        # avg = hf['avg'].value
-        # std = hf['std'].value
-        # y = hf['label'].value
         hf = dd.io.load(os.path.join(self.datadir, filename))
         avg = hf['avg']
         std = hf['std']
         y = hf['label']
-        #print('avg_shape', avg.shape, 'std_shape', std.shape)
-        #avg = avg.astype('float32')
-        #std = avg.astype('float32')
         # fMRI -= np.mean(fMRI)
         avg /= np.max(abs(avg))
-        #std = np.exp(-std)
         std /= np.max(std)
-        #std = np.moveaxis(std, -1, 0)
-        #avg = np.moveaxis(avg, -1, 0)
-        #print('avg_shape', avg.shape)
         x = np.stack((avg,std))
 
         return x,y
