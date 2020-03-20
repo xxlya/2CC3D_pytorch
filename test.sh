@@ -1,0 +1,1 @@
+python main.py --cross_val True --result_path '/basket/Biopoint_3DConv_Classification_pytorch/results_win7' --s_sz 7 --splits 'fold_split_rep_7.h5' --datadir '/basket/Biopoint/Data/data/Biopoint/h5_2c_win7' --no_val --no_train
